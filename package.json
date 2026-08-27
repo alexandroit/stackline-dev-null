@@ -1,42 +1,122 @@
 {
-  "name": "dev-null",
-  "version": "0.1.1",
-  "description": "/dev/null for node streams",
-  "main": "index.js",
+  "name": "@stackline/dev-null",
+  "version": "1.0.0",
+  "description": "Zero-dependency Node.js writable sink with exact dev-null compatibility and first-party types",
+  "type": "commonjs",
+  "main": "./index.js",
+  "module": "./index.mjs",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": {
+        "import": "./index.d.mts",
+        "require": "./index.d.cts",
+        "default": "./index.d.ts"
+      },
+      "import": "./index.mjs",
+      "require": "./index.js",
+      "default": "./index.js"
+    },
+    "./index": {
+      "types": {
+        "import": "./index.d.mts",
+        "require": "./index.d.cts",
+        "default": "./index.d.ts"
+      },
+      "import": "./index.mjs",
+      "require": "./index.js",
+      "default": "./index.js"
+    },
+    "./index.js": {
+      "types": {
+        "import": "./index.d.mts",
+        "require": "./index.d.cts",
+        "default": "./index.d.ts"
+      },
+      "import": "./index.mjs",
+      "require": "./index.js",
+      "default": "./index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "files": [
+    "index.js",
+    "index.mjs",
+    "index.d.ts",
+    "index.d.cts",
+    "index.d.mts",
+    "examples",
+    "CHANGELOG.md",
+    "LICENSE",
+    "NOTICE",
+    "README.md",
+    "SECURITY.md",
+    "THIRD_PARTY_LICENSES.md"
+  ],
   "scripts": {
-    "test-main": "tap test/*.js",
-    "test-0.10": "nave use 0.10 npm run test-main",
-    "test-all": "npm run test-main && npm run test-0.10",
-    "test": "if [ -e $TRAVIS ]; then npm run test-all; else npm run test-main; fi"
+    "clean": "node scripts/clean.mjs",
+    "build": "node scripts/build.mjs",
+    "lint": "eslint index.js index.mjs scripts test docs-site",
+    "test:upstream": "node --test test/upstream.test.js",
+    "test:compatibility": "node --test test/compatibility.test.js",
+    "test:differential": "node test/differential.js",
+    "test:esm": "node test/esm.mjs",
+    "test:types": "node node_modules/typescript-3-9/bin/tsc -p test/types/tsconfig.legacy.json && node node_modules/typescript/bin/tsc -p test/types/tsconfig.commonjs.json && node node_modules/typescript/bin/tsc -p test/types/tsconfig.modern.json",
+    "test:runtime": "node test/runtime-compat.js",
+    "test": "npm run test:upstream && npm run test:compatibility && npm run test:differential && npm run test:esm && npm run test:types && npm run test:runtime",
+    "test:coverage": "c8 --all --include=index.js --check-coverage --lines 100 --functions 100 --branches 100 node --test test/upstream.test.js test/compatibility.test.js",
+    "test:smoke": "node scripts/smoke-install.mjs",
+    "test:registry": "node scripts/smoke-registry.mjs",
+    "test:docs": "npm run docs:build && node scripts/check-docs.mjs",
+    "check:package": "publint && attw --pack .",
+    "pack:check": "npm pack --dry-run",
+    "audit:dependencies": "npm audit --omit=dev --audit-level=low",
+    "audit:signatures": "npm audit signatures",
+    "docs:build": "npm run build && node scripts/build-docs.mjs",
+    "docs:serve": "node scripts/serve-docs.mjs",
+    "verify": "npm run clean && npm run lint && npm run build && npm test && npm run test:coverage && npm run test:smoke && npm run check:package && npm run pack:check && npm run test:docs && npm run audit:dependencies",
+    "prepack": "npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/thlorenz/dev-null.git"
+    "url": "git+https://github.com/alexandroit/stackline-dev-null.git"
   },
-  "homepage": "https://github.com/thlorenz/dev-null",
-  "dependencies": {},
-  "devDependencies": {
-    "nave": "~0.4.3",
-    "tap": "~0.4.3",
-    "tap-stream": "~0.2.0"
+  "homepage": "https://alexandro.net/docs/vanilla/dev-null/",
+  "bugs": {
+    "url": "https://github.com/alexandroit/stackline-dev-null/issues"
   },
   "keywords": [
+    "dev-null",
+    "writable",
     "streams",
-    "test",
-    "debug",
-    "ignore",
-    "silence"
+    "sink",
+    "discard",
+    "object-mode",
+    "zero-dependency",
+    "typescript",
+    "stackline"
   ],
-  "author": {
-    "name": "Thorsten Lorenz",
-    "email": "thlorenz@gmx.de",
-    "url": "http://thlorenz.com"
+  "author": "Stackline Maintainers",
+  "contributors": [
+    "Thorsten Lorenz"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=12"
   },
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/thlorenz/dev-null/blob/master/LICENSE"
+  "publishConfig": {
+    "access": "public"
   },
-  "engine": {
-    "node": ">=0.10"
+  "devDependencies": {
+    "@arethetypeswrong/cli": "0.18.5",
+    "@eslint/js": "10.0.1",
+    "@types/node": "14.18.63",
+    "c8": "12.0.0",
+    "dev-null-baseline": "npm:dev-null@0.1.1",
+    "eslint": "10.9.1",
+    "publint": "0.3.24",
+    "typescript": "7.0.2",
+    "typescript-3-9": "npm:typescript@3.9.10"
   }
 }

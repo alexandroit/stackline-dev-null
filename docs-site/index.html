@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@stackline/dev-null | Maintained Node.js writable sink</title>
+  <meta name="description" content="A zero-dependency Node.js writable sink with dev-null compatibility, ESM, TypeScript types, and verified stream semantics.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://alexandro.net/docs/vanilla/dev-null/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="@stackline/dev-null">
+  <meta property="og:description" content="A maintained, zero-dependency writable sink for Node.js streams.">
+  <meta property="og:url" content="https://alexandro.net/docs/vanilla/dev-null/">
+  <meta property="og:image" content="https://alexandro.net/docs/vanilla/dev-null/assets/dev-null-terminal.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "@stackline/dev-null",
+    "codeRepository": "https://github.com/alexandroit/stackline-dev-null",
+    "downloadUrl": "https://www.npmjs.com/package/@stackline/dev-null",
+    "license": "https://opensource.org/license/mit",
+    "programmingLanguage": ["JavaScript", "TypeScript"],
+    "runtimePlatform": "Node.js 12 and newer",
+    "softwareVersion": "{{PACKAGE_VERSION}}"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#stream-configurator">Skip to configurator</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="@stackline/dev-null home">
+      <span class="brand-mark" aria-hidden="true">/0</span>
+      <span>@stackline/dev-null</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#stream-configurator">Configure</a>
+      <a href="#api">API</a>
+      <a href="#compatibility">Compatibility</a>
+      <a href="https://github.com/alexandroit/stackline-dev-null">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="product-intro dev-null-hero">
+      <div class="intro-content">
+        <p class="eyebrow">Node.js writable sink</p>
+        <h1>@stackline/dev-null</h1>
+        <p>Discard stream chunks with the established `dev-null` contract, zero runtime dependencies, native ESM, and first-party types.</p>
+        <div class="install-row">
+          <code id="install-command">npm install @stackline/dev-null</code>
+          <button class="compact-button" type="button" data-copy="#install-command">Copy install</button>
+        </div>
+        <div class="release-line" aria-label="Release facts">
+          <span>v{{PACKAGE_VERSION}}</span>
+          <span>Node 12+</span>
+          <span>0 runtime dependencies</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-band" id="stream-configurator">
+      <div class="section-inner wide">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow dark">Configuration builder</p>
+            <h2>Stream sink</h2>
+          </div>
+        </div>
+
+        <div class="control-bar sink-controls">
+          <label>
+            <span>Module</span>
+            <select id="module-style">
+              <option value="esm">ESM</option>
+              <option value="commonjs">CommonJS</option>
+            </select>
+          </label>
+          <label>
+            <span>Mode</span>
+            <select id="stream-mode">
+              <option value="bytes">Bytes</option>
+              <option value="objects">Objects</option>
+            </select>
+          </label>
+          <label class="number-control">
+            <span>High water mark</span>
+            <input id="high-water-mark" type="number" min="1" max="1048576" step="1" value="16384">
+          </label>
+          <button class="primary-button" id="generate-button" type="button">Generate</button>
+        </div>
+
+        <div class="workspace-grid sink-workspace">
+          <section class="editor-panel" aria-labelledby="chunks-title">
+            <header>
+              <h3 id="chunks-title">Chunks</h3>
+              <span id="chunk-format">one value per line</span>
+            </header>
+            <textarea id="chunk-input" spellcheck="false">alpha
+beta
+gamma</textarea>
+          </section>
+          <section class="editor-panel output-panel sink-output" aria-labelledby="generated-title">
+            <header>
+              <h3 id="generated-title">Generated program</h3>
+              <button class="text-button" type="button" data-copy="#result-output">Copy code</button>
+            </header>
+            <div class="stream-facts" aria-live="polite">
+              <span id="mode-fact">byte mode</span>
+              <span id="chunk-fact">3 chunks</span>
+              <span id="unit-fact">16,384 bytes</span>
+            </div>
+            <pre id="result-output"><code></code></pre>
+          </section>
+        </div>
+        <div class="status-bar" role="status" aria-live="polite">
+          <span class="status-indicator"></span>
+          <span id="status-text">Configuration ready</span>
+          <span class="status-separator"></span>
+          <span>Callbacks remain asynchronous</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-band" id="api">
+      <div class="section-inner content-grid">
+        <div>
+          <p class="eyebrow dark">API</p>
+          <h2>One function, normal Writable rules</h2>
+          <p>The export is callable with or without `new`. Node owns validation, buffering, backpressure, lifecycle events, destroy, and pipeline errors.</p>
+        </div>
+        <div class="api-table-wrapper">
+          <table>
+            <thead><tr><th>Surface</th><th>Contract</th></tr></thead>
+            <tbody>
+              <tr><td><code>devNull(options?)</code></td><td>Returns a `Writable` that asynchronously discards accepted chunks.</td></tr>
+              <tr><td><code>objectMode</code></td><td>Required for arbitrary JavaScript values; byte mode remains the default.</td></tr>
+              <tr><td><code>highWaterMark</code></td><td>Controls normal `write()` and `drain` backpressure in bytes or objects.</td></tr>
+              <tr><td><code>signal</code></td><td>Forwarded to `Writable` on Node versions that support abortable streams.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-band muted" id="compatibility">
+      <div class="section-inner proof-grid">
+        <div>
+          <p class="eyebrow dark">Release evidence</p>
+          <h2>Compatibility is measured</h2>
+          <p>The suite compares lifecycle, callback order, write return values, chunk decoding, and backpressure against the frozen upstream package.</p>
+          <a class="inline-link" href="./guides/compatibility.md">Read the compatibility contract</a>
+        </div>
+        <dl class="proof-list">
+          <div><dt>300</dt><dd>differential stream executions</dd></div>
+          <div><dt>12–24</dt><dd>Node runtime matrix</dd></div>
+          <div><dt>3.9+</dt><dd>TypeScript compatibility</dd></div>
+          <div><dt>0</dt><dd>runtime dependencies</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="content-band">
+      <div class="section-inner content-grid">
+        <div>
+          <p class="eyebrow dark">Greenfield choice</p>
+          <h2>Native Writable is valid</h2>
+          <p>For new code with no package-name compatibility requirement, Node's constructor can define a sink directly. This package exists for a maintained drop-in, shared factory behavior, types, and release evidence.</p>
+        </div>
+        <div class="code-surface">
+          <pre><code>import { Writable } from 'node:stream'
+
+const sink = new Writable({
+  write(_chunk, _encoding, callback) {
+    callback()
+  }
+})</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="resource-band">
+      <div class="section-inner resource-grid">
+        <div>
+          <h2>Project resources</h2>
+          <p>Migration, exact behavior, provenance, security, and machine-readable context.</p>
+        </div>
+        <nav aria-label="Project resources">
+          <a href="./guides/migration.md">Migration</a>
+          <a href="./guides/compatibility.md">Compatibility</a>
+          <a href="./guides/third-party-licenses.md">Licenses</a>
+          <a href="./llms.txt">llms.txt</a>
+          <a href="https://www.npmjs.com/package/@stackline/dev-null">npm</a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>@stackline/dev-null</strong><span>Independent maintained continuation. MIT licensed.</span></div>
+    <nav aria-label="Footer navigation">
+      <a href="https://github.com/alexandroit/stackline-dev-null">Source</a>
+      <a href="https://github.com/alexandroit/stackline-dev-null/security">Security</a>
+      <a href="https://alexandro.net/docs/open-source/">Stackline catalog</a>
+    </nav>
+  </footer>
+
+  <script src="./app.js" defer></script>
+  <script src="./analytics.js" defer></script>
+</body>
+</html>

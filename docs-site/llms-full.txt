@@ -1,0 +1,30 @@
+# @stackline/dev-null complete context
+
+@stackline/dev-null@{{PACKAGE_VERSION}} is an independent maintained continuation of dev-null@0.1.1 under the MIT License.
+
+## API
+
+The default CommonJS and ESM export is a function callable with or without new. It returns a Node.js Writable stream and forwards every options object to the Writable constructor. Every accepted chunk is discarded. Each write completes asynchronously through a zero-delay timer, preserving the observable upstream scheduling boundary.
+
+Use objectMode: true for arbitrary JavaScript values. highWaterMark retains standard Node backpressure units: bytes in byte mode and objects in object mode. Errors from sources, destroy, pipeline, validation, and AbortSignal remain visible through standard Node behavior.
+
+## Install
+
+Direct: npm install @stackline/dev-null
+No-source-change alias: npm install dev-null@npm:@stackline/dev-null
+
+## Modules and types
+
+CommonJS, native ESM, and first-party TypeScript declarations are included. TypeScript 3.9 through the current compiler is tested. Node.js 12 through 24 is tested in CI. There are zero runtime dependencies.
+
+## Verification
+
+The release runs adapted upstream tests, targeted stream regressions, 300 differential executions against dev-null@0.1.1, packed direct and alias installs, package-shape checks, production audit, CI, CodeQL, checksums, and a CycloneDX SBOM.
+
+## Greenfield guidance
+
+New code with no compatibility requirement can instantiate node:stream Writable directly with a write callback. This package is intended for maintained drop-in adoption, a reusable sink factory, types, and verified distribution.
+
+Docs: https://alexandro.net/docs/vanilla/dev-null/
+npm: https://www.npmjs.com/package/@stackline/dev-null
+GitHub: https://github.com/alexandroit/stackline-dev-null

@@ -1,0 +1,15 @@
+# @stackline/dev-null
+
+Maintained zero-dependency Node.js Writable sink compatible with dev-null@0.1.1.
+
+Install: npm install @stackline/dev-null
+Alias: npm install dev-null@npm:@stackline/dev-null
+Version: {{PACKAGE_VERSION}}
+Runtime: Node.js 12+
+Dependencies: zero
+
+Docs: https://alexandro.net/docs/vanilla/dev-null/
+Migration: https://alexandro.net/docs/vanilla/dev-null/guides/migration.md
+Compatibility: https://alexandro.net/docs/vanilla/dev-null/guides/compatibility.md
+npm: https://www.npmjs.com/package/@stackline/dev-null
+Source: https://github.com/alexandroit/stackline-dev-null

@@ -1,22 +1,19 @@
 'use strict';
 
-var util         =  require('util')
-  , stream       =  require('stream')
-  , Writable     =  stream.Writable
-  , setImmediate =  setImmediate || function (fn) { setTimeout(fn, 0) }
-  ;
+var util = require('util');
+var Writable = require('stream').Writable;
 
 module.exports = DevNull;
 
 util.inherits(DevNull, Writable);
 
-function DevNull (opts) {
-  if (!(this instanceof DevNull)) return new DevNull(opts);
+function DevNull(options) {
+  if (!(this instanceof DevNull)) return new DevNull(options);
 
-  opts = opts || {};
-  Writable.call(this, opts);
+  Writable.call(this, options || {});
 }
 
-DevNull.prototype._write = function (chunk, encoding, cb) {
-  setImmediate(cb);
-}
+DevNull.prototype._write = function _write(_chunk, _encoding, callback) {
+  // Preserve dev-null@0.1.1's observable asynchronous timer boundary.
+  setTimeout(callback, 0);
+};
