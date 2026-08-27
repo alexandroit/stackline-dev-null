@@ -3,13 +3,13 @@ schema: stackline-project-memory-v1
 package: dev-null
 upstream: https://github.com/thlorenz/dev-null
 stackline_package: "@stackline/dev-null"
-state: IMPLEMENTING
+state: PUBLISHED
 registry_scope: verdaccio-and-public-npm
-public_npm: false
-public_github: false
-docs_production: false
+public_npm: true
+public_github: true
+docs_production: true
 created: 2026-08-26
-last_updated: 2026-08-26
+last_updated: 2026-08-27
 ---
 
 # Project Memory
@@ -47,10 +47,21 @@ package.
 - one open issue and no open pull requests;
 - npm latest and default-branch implementation: 2013-09-10.
 
-## Implementation status
+## Production release
 
-Implementation and local verification are complete. Public URLs and immutable
-artifact hashes will be recorded only after remote gates and publication pass.
+- package: `@stackline/dev-null@1.0.0`;
+- npm: https://www.npmjs.com/package/@stackline/dev-null;
+- Verdaccio: published from the exact same tarball as npm;
+- source: https://github.com/alexandroit/stackline-dev-null;
+- release: https://github.com/alexandroit/stackline-dev-null/releases/tag/stackline-v1.0.0;
+- documentation: https://alexandro.net/docs/vanilla/dev-null/;
+- source and tag commit: `5a2e2fd9de0186e822c42d69da97fa1271d61c80`;
+- tarball SHA-1: `b9f2fa64bf42db649003ad1695e37ca5c474fb7f`;
+- tarball SHA-256: `ce1199e9d90428b4c3a3e600c7ba5c8aafe08c173a0d2502a1d0a699683ebf40`;
+- npm integrity: `sha512-1RK3+0Q5eHMKiTG2dqG3yWs8/pZVpzrMmS3zaibA7UxrMxSDTDvL3jVY0K96x2ejShf7Gwz5FtzT0RljdYbTgg==`;
+- packed size: 5,262 bytes; unpacked size: 13,546 bytes; 14 files;
+- CI: https://github.com/alexandroit/stackline-dev-null/actions/runs/33037410660;
+- CodeQL: https://github.com/alexandroit/stackline-dev-null/actions/runs/33037410692.
 
 ## Local verification
 
@@ -76,4 +87,6 @@ artifact hashes will be recorded only after remote gates and publication pass.
 - 2026-08-26: GO approved before implementation.
 - 2026-08-27: explicit historical timer behavior, ESM, TypeScript declarations,
   package exports, documentation, and release automation were implemented.
-- 2026-08-27: all local release gates passed; remote publication pending.
+- 2026-08-27: all local and remote release gates passed; one immutable artifact
+  was published to Verdaccio and official npm; GitHub source, tag, SBOM, release
+  assets, public documentation, catalog, and aggregate sitemaps were verified.
