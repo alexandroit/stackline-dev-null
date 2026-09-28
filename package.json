@@ -1,6 +1,6 @@
 {
   "name": "@stackline/dev-null",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Zero-dependency Node.js writable sink with exact dev-null compatibility and first-party types",
   "type": "commonjs",
   "main": "./index.js",
@@ -95,7 +95,9 @@
     "object-mode",
     "zero-dependency",
     "typescript",
-    "stackline"
+    "stackline",
+    "writable-stream",
+    "stream-sink"
   ],
   "author": "Stackline Maintainers",
   "contributors": [

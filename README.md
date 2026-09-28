@@ -1,20 +1,24 @@
 # @stackline/dev-null
 
-> A maintained, zero-dependency writable sink with the established `dev-null@0.1.1` behavior.
+> Zero-dependency Node.js writable sink with exact dev-null compatibility and first-party types
 
 [![npm version](https://img.shields.io/npm/v/@stackline/dev-null.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/dev-null)
-[![npm downloads](https://img.shields.io/npm/dm/@stackline/dev-null.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/dev-null)
-[![CI](https://img.shields.io/github/actions/workflow/status/alexandroit/stackline-dev-null/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/alexandroit/stackline-dev-null/actions/workflows/ci.yml)
-[![license](https://img.shields.io/npm/l/@stackline/dev-null.svg?style=flat-square)](LICENSE)
+[![license](https://img.shields.io/npm/l/@stackline/dev-null.svg?style=flat-square)](https://github.com/alexandroit/stackline-dev-null/blob/main/LICENSE)
+[![GitHub repository](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com/alexandroit/stackline-dev-null)
 
-**[Docs and stream configurator](https://alexandro.net/docs/vanilla/dev-null/)** |
+**[Documentation](https://alexandro.net/docs/vanilla/dev-null/)** |
 **[npm](https://www.npmjs.com/package/@stackline/dev-null)** |
-**[GitHub](https://github.com/alexandroit/stackline-dev-null)** |
-**[Migration](MIGRATION.md)** |
-**[Security](SECURITY.md)** |
-**[Changelog](CHANGELOG.md)**
+**[Issues](https://github.com/alexandroit/stackline-dev-null/issues)** |
+**[Repository](https://github.com/alexandroit/stackline-dev-null)**
 
-**Current package version:** `1.0.0`
+**Package version:** `1.0.1`
+
+## Why this package?
+
+> A maintained, zero-dependency writable sink with the established `dev-null@0.1.1` behavior.
+
+
+
 
 This package is an independent, maintained continuation of
 [`dev-null`](https://github.com/thlorenz/dev-null). It preserves the callable
@@ -22,7 +26,38 @@ Node.js `Writable` sink, its asynchronous write boundary, and option forwarding
 while adding native ESM entry points, first-party TypeScript declarations, and
 reproducible release checks.
 
-## Install
+<a id="provenance"></a>
+
+### Provenance
+
+The upstream source and authorship history are documented in
+[UPSTREAM_AUDIT.md](https://github.com/alexandroit/stackline-dev-null/blob/main/UPSTREAM_AUDIT.md) and [NOTICE](https://github.com/alexandroit/stackline-dev-null/blob/main/NOTICE). The Stackline fork
+is not affiliated with or endorsed by the original author.
+
+## Compatibility
+
+| Item | Value |
+| --- | --- |
+| Package | `@stackline/dev-null@1.0.1` |
+| Node.js runtime | `>=12` |
+| CommonJS / primary entry | `./index.js` |
+| ES module entry | `./index.mjs` |
+| Type declarations | `./index.d.ts` |
+
+- CommonJS and native ESM
+- First-party TypeScript declarations, including TypeScript 3.9 consumers
+- Node.js 12 and newer
+- Byte and object mode
+- Zero runtime dependencies
+
+See [COMPATIBILITY_CONTRACT.md](https://github.com/alexandroit/stackline-dev-null/blob/main/COMPATIBILITY_CONTRACT.md) and
+[MIGRATION.md](https://github.com/alexandroit/stackline-dev-null/blob/main/MIGRATION.md) for the exact boundary and alias migration.
+
+## Installation
+
+<a id="install"></a>
+
+### Install
 
 ```bash
 npm install @stackline/dev-null
@@ -71,20 +106,11 @@ sink.end({ id: 2 });
 All options are passed directly to Node's `Writable` constructor. Set
 `objectMode: true` before writing arbitrary JavaScript values.
 
-## API
+## Features and Integrations
 
-### `devNull(options?)`
+<a id="when-to-use-the-native-primitive"></a>
 
-Returns a Node.js `Writable` that accepts and discards every chunk. Calling the
-export with or without `new` is supported. `_write` completes asynchronously on
-the same timer boundary observed in `dev-null@0.1.1`, so standard backpressure,
-`drain`, `finish`, `close`, destroy, and error behavior remains owned by Node's
-stream implementation.
-
-The package does not swallow upstream pipeline errors and does not convert
-invalid chunks. Byte mode rejects objects exactly as a normal `Writable` does.
-
-## When to use the native primitive
+### When to use the native primitive
 
 New code that does not need package compatibility can construct a sink directly:
 
@@ -102,29 +128,61 @@ Use this package when a dependency already expects `dev-null`, when a shared
 factory keeps stream configuration consistent, or when first-party types and a
 tested Node-version contract are useful.
 
-## Compatibility
-
-- CommonJS and native ESM
-- First-party TypeScript declarations, including TypeScript 3.9 consumers
-- Node.js 12 and newer
-- Byte and object mode
-- Zero runtime dependencies
-
-See [COMPATIBILITY_CONTRACT.md](COMPATIBILITY_CONTRACT.md) and
-[MIGRATION.md](MIGRATION.md) for the exact boundary and alias migration.
-
 ## Security
 
-Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md).
+Report vulnerabilities privately as described in [SECURITY.md](https://github.com/alexandroit/stackline-dev-null/blob/main/SECURITY.md).
 Do not disclose an unpatched vulnerability in a public issue.
 
-## Provenance
+## API Surface
 
-The upstream source and authorship history are documented in
-[UPSTREAM_AUDIT.md](UPSTREAM_AUDIT.md) and [NOTICE](NOTICE). The Stackline fork
-is not affiliated with or endorsed by the original author.
+<a id="api"></a>
+
+### API
+
+#### `devNull(options?)`
+
+Returns a Node.js `Writable` that accepts and discards every chunk. Calling the
+export with or without `new` is supported. `_write` completes asynchronously on
+the same timer boundary observed in `dev-null@0.1.1`, so standard backpressure,
+`drain`, `finish`, `close`, destroy, and error behavior remains owned by Node's
+stream implementation.
+
+The package does not swallow upstream pipeline errors and does not convert
+invalid chunks. Byte mode rejects objects exactly as a normal `Writable` does.
+
+## Local Development
+
+```sh
+git clone https://github.com/alexandroit/stackline-dev-null.git
+cd stackline-dev-null
+npm ci
+npm run verify
+```
+
+Release tooling uses Node.js 24.20.0 and npm 11.19.0. The consumer runtime contract remains the one documented above.
+
+## Consumer Smoke Test
+
+Run the repository's existing consumer/package check after installing development dependencies:
+
+```sh
+npm run test:smoke
+```
+
+## Release Checklist
+
+Run `npm run verify` and inspect the package contents before release. Publish a new version through the [GitHub Actions publishing workflow](https://github.com/alexandroit/stackline-dev-null/actions/workflows/publish.yml), using the SHA-512 digest of the reviewed tarball. Verify the exact published version, tarball integrity, and npm provenance after the run.
+
+## Community and Support
+
+Report reproducible package issues in the [issue tracker](https://github.com/alexandroit/stackline-dev-null/issues). Use the [security policy](https://github.com/alexandroit/stackline-dev-null/blob/main/SECURITY.md) for vulnerability reports.
+
+- [Stackline / Alexandro.Net](https://alexandro.net/)
+- [GitHub](https://github.com/alexandroit)
+- [Maintainer LinkedIn](https://www.linkedin.com/in/aleinfo/)
+- [Reddit community: r/Stackline](https://www.reddit.com/r/Stackline/)
 
 ## License
 
 MIT. The original copyright and permission notice is preserved in
-[LICENSE](LICENSE).
+[LICENSE](https://github.com/alexandroit/stackline-dev-null/blob/main/LICENSE).
