@@ -1,0 +1,31 @@
+{
+  "repository": "alexandroit/stackline-dev-null",
+  "packages": [
+    {
+      "name": "@stackline/dev-null",
+      "path": "README.md",
+      "version": "1.0.2",
+      "baselineVersion": "1.0.1",
+      "keywords": [
+        "stackline",
+        "npm-package",
+        "dev-null",
+        "nodejs",
+        "typescript",
+        "writable",
+        "streams",
+        "sink",
+        "discard",
+        "object-mode",
+        "zero-dependency",
+        "writable-stream",
+        "stream-sink"
+      ],
+      "homepage": "https://alexandro.net/docs/vanilla/dev-null/",
+      "baselineTarball": "https://registry.npmjs.org/@stackline/dev-null/-/dev-null-1.0.1.tgz",
+      "baselineIntegrity": "sha512-N61unx1seMY8Yg7/Ox4aSqZCvWvl6BIqP92TaEOGNE7JgF1UuBSonui/dWXaTpeWh4ttxnEMcDOgxI/LSxoG7w==",
+      "expectedSha512": "1e48d0edbd206b48f4a62069a0eb1bf280f627c8e189c58da5cdb645ceda8daed594cf3527bb02cd7fc52d92d91b283ba77103ac84bc5069af33cc88b7586eb2",
+      "tag": "docs-stackline-dev-null-v1.0.2"
+    }
+  ]
+}
