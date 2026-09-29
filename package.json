@@ -1,6 +1,6 @@
 {
   "name": "@stackline/dev-null",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Zero-dependency Node.js writable sink with exact dev-null compatibility and first-party types",
   "type": "commonjs",
   "main": "./index.js",
