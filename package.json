@@ -115,10 +115,10 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.5",
     "@eslint/js": "10.0.1",
-    "@types/node": "14.18.63",
+    "@types/node": "26.6.3",
     "c8": "12.0.0",
     "dev-null-baseline": "npm:dev-null@0.1.1",
-    "eslint": "10.9.1",
+    "eslint": "10.11.0",
     "publint": "0.3.24",
     "typescript": "7.0.2",
     "typescript-3-9": "npm:typescript@3.9.10"
