@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict'
-import { mkdtemp, rm, writeFile } from 'node:fs/promises'
+import { readFile, mkdtemp, rm, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { spawnSync } from 'node:child_process'
 
 const registry = process.env.STACKLINE_REGISTRY || 'http://127.0.0.1:4873'
-const version = process.env.STACKLINE_VERSION || '1.0.0'
+const version = process.env.STACKLINE_VERSION || JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8')).version
 const temporary = await mkdtemp(path.join(os.tmpdir(), 'stackline-dev-null-registry-'))
 
 try {

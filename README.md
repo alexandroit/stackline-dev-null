@@ -39,7 +39,7 @@ is not affiliated with or endorsed by the original author.
 
 | Item | Value |
 | --- | --- |
-| Package | `@stackline/dev-null@1.0.3` |
+| Package | `@stackline/dev-null@1.0.4` |
 | Node.js runtime | `>=12` |
 | CommonJS / primary entry | `./index.js` |
 | ES module entry | `./index.mjs` |
