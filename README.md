@@ -10,7 +10,7 @@
 
 **[Documentation](https://alexandro.net/docs/vanilla/dev-null/)** | **[npm](https://www.npmjs.com/package/@stackline/dev-null)** | **[Issues](https://github.com/alexandroit/stackline-dev-null/issues)** | **[Repository](https://github.com/alexandroit/stackline-dev-null)**
 
-**Current package version:** `1.0.3`
+**Current package version:** `1.0.5`
 
 ---
 
@@ -39,7 +39,7 @@ is not affiliated with or endorsed by the original author.
 
 | Item | Value |
 | --- | --- |
-| Package | `@stackline/dev-null@1.0.4` |
+| Package | `@stackline/dev-null@1.0.5` |
 | Node.js runtime | `>=12` |
 | CommonJS / primary entry | `./index.js` |
 | ES module entry | `./index.mjs` |
